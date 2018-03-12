@@ -11,7 +11,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -27,11 +27,11 @@ public class NewTest {
 	  @DataProvider(name = "hardCodedBrowsers", parallel = true)
 	    public static Object[][] sauceBrowserDataProvider(Method testMethod) {
 	        return new Object[][]{
-	                new Object[]{"MicrosoftEdge", "14.14393", "Windows 10"},
+	               // new Object[]{"MicrosoftEdge", "14.14393", "Windows 10"},
 	                new Object[]{"firefox", "49.0", "Windows 10"},
 	                new Object[]{"internet explorer", "11.0", "Windows 7"},
 	                //new Object[]{"safari", "10.0", "OS X 10.11"},
-	                new Object[]{"chrome", "54.0", "OS X 10.10"},
+	                new Object[]{"chrome", "54.0", "Windows 7"},
 	               // new Object[]{"firefox", "latest-1", "Windows 7"},
 	        };
 	    }
@@ -91,14 +91,14 @@ public class NewTest {
   
   @BeforeClass
   public void beforeClass() throws Exception{
-	  DesiredCapabilities caps = DesiredCapabilities.chrome();
+//	  DesiredCapabilities caps = DesiredCapabilities.chrome();
 //    caps.setCapability("platform", "Windows XP");
 //    caps.setCapability("version", "43.0");
 // 
      //driver = new RemoteWebDriver(new URL(URL), caps);
   }
 
-  @AfterClass
+  @AfterMethod
   public void afterClass(ITestResult result) {
 	  ((JavascriptExecutor) webDriver.get()).executeScript("sauce:job-result=" + (result.isSuccess() ? "passed" : "failed"));
       webDriver.get().quit();
